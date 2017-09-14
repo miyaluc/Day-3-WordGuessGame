@@ -34,10 +34,10 @@ game that will meet all of the requiements described in the user story above.
 
 ## Components
 - The program (should) contain the following
-    - Methods for each action (Home navigation, View words in the text file, add a word to the text file, Remove words from a text file, exit the game, start a new game)
+    - Methods for each action (Home navigation, View words in the text file, add a word to the text file, Remove words from a text file, exit the game, start a new game, play the game)
     - When playing a game, you should bring in all the words that exist in the text file, and *randomly* select one of the words to output to the conole for the user to guess
     - You should have a record the letters they have attempted so far
-    - If they guess a correct letter, display that letter in the console for them to refer back to whebn making guesses (i.e. C _ T S )
+    - If they guess a correct letter, display that letter in the console for them to refer back to when making guesses (i.e. C _ T S )
     - Errors should be handled through try/catch statements
     - You may use any shortcuts or 'helper' methods in this project. Do not create external classes to accomplish this task.
 
