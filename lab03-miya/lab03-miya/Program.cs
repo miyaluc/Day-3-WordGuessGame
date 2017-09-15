@@ -5,10 +5,13 @@ namespace lab03_miya
 {
     class Program
     {
+        //this is my main entry point for the project
+        //it sets a reference to a file path that I've set and it will open a text file called word-bank
         static void Main(string[] args)
         {
             string filePath = @"C:\Users\shami\source\repos\Day-3-WordGuessGame\word-bank.txt";
 
+            //if the text file does not already exist, the system will create a text file and write "Hi Josie, welcome to your guessing game.", in the text file
             if (!File.Exists(filePath))
             {
                 using (FileStream fs = File.Create(filePath))
@@ -21,14 +24,12 @@ namespace lab03_miya
             }
             else
             {
+                //if the text file does already exist, the system will read the text and show it to the user
                 string[] words = File.ReadAllLines(filePath);
 
                 int length = words.Length;
-                //foreach (string line in words)
-                //{
-                //    Console.WriteLine(line);
-                //}
             }
+            //the InputHandler() method refers to my main menu and saves the user's input as a number representing what the user would like to do
             InputHandler(filePath);
         }
         static public int NavigateGame()
@@ -58,6 +59,7 @@ namespace lab03_miya
             }
             return 0;
         }
+        //this method handles the user's selection and assigns a number to each method that the user can access
         static public void InputHandler(string filePath)
         {
             int selection = NavigateGame();
@@ -85,6 +87,8 @@ namespace lab03_miya
                     break;
             }
         }
+
+        //Josie can add words to the file as she wishes
         static void AddText(string filePath)
         {
             using (StreamWriter sw = File.AppendText(filePath))
@@ -96,6 +100,8 @@ namespace lab03_miya
             Console.WriteLine();
             InputHandler(filePath);
         }
+
+        //Josie can delete the file if she wishes
         static void DeleteText(string filePath)
         {
             File.Delete(filePath);
@@ -103,15 +109,12 @@ namespace lab03_miya
             Console.WriteLine();
             NavigateGame();
         }
+
+        //Josie can view the file as she wishes
         static void ViewWords(string filePath)
         {
             using (StreamReader sr = File.OpenText(filePath))
             {
-                //string s = "";
-                //while ((s = sr.ReadLine()) != null)
-                //{
-                //    Console.WriteLine(s);
-                //}
                 string[] words = File.ReadAllLines(filePath);
 
                 int length = words.Length;
@@ -123,17 +126,15 @@ namespace lab03_miya
             Console.WriteLine();
             NavigateGame();
         }
+
+        //Josie can exit the game as she wishes
         static void ExitGame(string filePath)
         {
             Console.WriteLine("Bye Bye.");
         }
 
-        //private static Random _rand = new Random();
-
-        //public static string GetRandomWord(string filePath)
-        //{
-
-        //}
+        //need a method that saves all of her guesses(both correct and incorrect) throughout each session of the game, as well as keeping a record of the letters they have attempted so far
+        //along with the ability to show her how many letters out of the word she has guessed correctly
 
         public static void StartGame(string filePath)
         {
@@ -144,7 +145,7 @@ namespace lab03_miya
 
             int guesses = 0;
 
-            Console.WriteLine("Guess a letter, any letter.");
+            Console.WriteLine("Guess a word, any word. If you enter a letter at this point, you will be incorrect.");
 
             string stringGuessed = (Console.ReadLine()).ToLower();
 
@@ -153,6 +154,11 @@ namespace lab03_miya
             if (lines == stringGuessed)
             {
                 Console.WriteLine("You psychic, you! I mean, it's not like YOU created the word bank or anything.");
+            }
+            //working on a method that tests whether a letter guessed is contained within the random word that was generated
+            else if (lines.ToLower().Contains(stringGuessed))
+            {
+                Console.WriteLine("That letter is a part of this word. Keep guessing.");
             }
             else
             {
@@ -164,11 +170,12 @@ namespace lab03_miya
         }
     }
 }
-//## Directions
+
+//# Directions
 //The directions below mock what an actual client requirements document may contain.It is your job, as a developer, to interpret these directions and
 //create a program based on what is stated below.
 
-//Josie Cat has requested that a "Word Guess Game" be built. The main idea of the game is she must guess what a mystery word is by inputting
+//Josie Cat has requested that a "Word Guess Game" be built. The main idea of the game is she must guess what a mystery word is by inputitng
 //either (1) letter or a sequence of letters at a time.The game should save all of her guesses(both correct and incorrect) throughout each session of the game,
 //along with the ability to show her how many letters out of the word she has guessed correctly.
 
@@ -178,6 +185,7 @@ namespace lab03_miya
 
 //Using everything you've learned and researched up to this point, create a word guess
 //game that will meet all of the requiements described in the user story above.
+ 
 
 //## ReadMe
 //- Your readme should include the following information:
@@ -194,3 +202,10 @@ namespace lab03_miya
 //    - If they guess a correct letter, display that letter in the console for them to refer back to when making guesses(i.e.C _ T S)
 //    - Errors should be handled through try/catch statements
 //    - You may use any shortcuts or 'helper' methods in this project.Do not create external classes to accomplish this task.
+
+//## Rubric
+//- 3pts: Application runs without any errors
+//- 2pt: System.IO // CRUD file manipulation
+//- 2pt: Output user response with game progress
+//- 2pt: Readme included with answers to questions
+//- 1pt: Simple user interface
